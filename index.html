@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decode the Manosphere — Critical Media Literacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #16161c;
+    --bg3: #1e1e28;
+    --card: #1c1c25;
+    --card-border: #2a2a38;
+    --accent: #ff6b47;
+    --accent2: #ffc947;
+    --accent3: #7c6aff;
+    --accent4: #47e0c8;
+    --text: #f0eee8;
+    --text2: #a09e9a;
+    --text3: #68666a;
+    --danger: #ff4747;
+    --success: #3bc98a;
+    --nav-bg: rgba(15,15,19,0.92);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --r: 10px;
+    --r-lg: 16px;
+  }
+
+  html.light {
+    --bg: #f5f4f0;
+    --bg2: #eceae4;
+    --bg3: #e2dfd7;
+    --card: #ffffff;
+    --card-border: #d4d0c8;
+    --accent: #e0521f;
+    --accent2: #c48a00;
+    --accent3: #5040d0;
+    --accent4: #1a9e8a;
+    --text: #1a1916;
+    --text2: #5a5855;
+    --text3: #8a8884;
+    --danger: #d03030;
+    --success: #1a8a5a;
+    --nav-bg: rgba(245,244,240,0.93);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 60px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--accent);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    flex-shrink: 0;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text2);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--bg3); color: var(--text); }
+  .nav-links a.active { background: var(--accent); color: #fff; }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,107,71,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(255,107,71,0.3);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text2);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--r);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #e85a38; transform: translateY(-1px); }
+  .btn-ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--card-border); }
+  .btn-ghost:hover { background: var(--card); }
+
+  /* SECTION HEADERS */
+  .section-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .section-desc {
+    color: var(--text2);
+    font-size: 0.95rem;
+    max-width: 600px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(255,107,71,0.4); }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 {
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .card p { font-size: 0.88rem; color: var(--text2); line-height: 1.65; }
+  .card-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto 1rem;
+    padding: 0 2rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  /* GAME CONTAINERS */
+  .game-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .game-box {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .game-title {
+    font-family: var(--font-head);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .game-desc {
+    font-size: 0.88rem;
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+  }
+
+  /* CONNECTIONS GAME */
+  .conn-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+  .conn-cell {
+    background: var(--bg3);
+    border: 2px solid transparent;
+    border-radius: var(--r);
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+  .conn-cell:hover { background: var(--bg2); border-color: var(--accent); }
+  .conn-cell.selected { background: rgba(255,107,71,0.15); border-color: var(--accent); color: var(--accent); }
+  .conn-cell.correct-0 { background: rgba(71,224,168,0.2); border-color: var(--success); color: var(--success); cursor: default; }
+  .conn-cell.correct-1 { background: rgba(124,106,255,0.2); border-color: var(--accent3); color: var(--accent3); cursor: default; }
+  .conn-cell.correct-2 { background: rgba(255,201,71,0.2); border-color: var(--accent2); color: var(--accent2); cursor: default; }
+  .conn-cell.correct-3 { background: rgba(255,107,71,0.2); border-color: var(--accent); color: var(--accent); cursor: default; }
+  .conn-cell.wrong { animation: shake 0.3s; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .conn-actions { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .conn-msg { font-size: 0.88rem; margin-top: 0.75rem; min-height: 1.4rem; }
+  .conn-legend { margin-top: 1.25rem; }
+  .conn-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r);
+    margin-bottom: 0.5rem;
+    font-size: 0.82rem;
+  }
+  .conn-legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .conn-lives { display: flex; gap: 6px; }
+  .life { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+  .life.lost { background: var(--bg3); border: 1px solid var(--card-border); }
+
+  /* MATCHING GAME */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .match-col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .match-col-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    margin-bottom: 0.25rem;
+  }
+  .match-item {
+    background: var(--bg3);
+    border: 2px solid transparent;
+    border-radius: var(--r);
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .match-item:hover { border-color: var(--accent3); }
+  .match-item.selected { background: rgba(124,106,255,0.15); border-color: var(--accent3); }
+  .match-item.matched { background: rgba(71,224,168,0.15); border-color: var(--success); cursor: default; color: var(--success); }
+  .match-item.wrong { background: rgba(255,71,71,0.15); border-color: var(--danger); animation: shake 0.3s; }
+
+  /* FILL BLANKS */
+  .fib-text {
+    font-size: 1rem;
+    line-height: 2.2;
+    background: var(--bg3);
+    border-radius: var(--r);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .fib-blank {
+    display: inline-block;
+    background: var(--bg2);
+    border: 2px solid var(--card-border);
+    border-radius: 6px;
+    min-width: 120px;
+    padding: 2px 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s;
+    vertical-align: middle;
+    text-align: center;
+    min-height: 28px;
+    line-height: 24px;
+  }
+  .fib-blank:hover { border-color: var(--accent3); }
+  .fib-blank.filled { border-color: var(--accent3); background: rgba(124,106,255,0.1); color: var(--accent3); }
+  .fib-blank.correct-ans { border-color: var(--success); background: rgba(71,224,168,0.1); color: var(--success); }
+  .fib-blank.wrong-ans { border-color: var(--danger); background: rgba(255,71,71,0.1); color: var(--danger); }
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .word-chip {
+    background: var(--bg3);
+    border: 1px solid var(--card-border);
+    border-radius: 100px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .word-chip:hover { border-color: var(--accent3); color: var(--accent3); }
+  .word-chip.used { opacity: 0.35; cursor: default; pointer-events: none; }
+
+  /* TRUE/FALSE QUIZ */
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-q-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    background: var(--bg3);
+    padding: 1rem 1.25rem;
+    border-radius: var(--r);
+    line-height: 1.6;
+  }
+  .quiz-q-number {
+    font-size: 0.72rem;
+    color: var(--text3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .quiz-options { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .quiz-opt {
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    border: 1px solid var(--card-border);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--bg3);
+    color: #ffffff;
+  }
+  .quiz-opt:hover { border-color: var(--accent3); color: #ffffff; background: var(--accent3); }
+  .quiz-opt.correct { background: rgba(71,224,168,0.15); border-color: var(--success); color: var(--success); }
+  .quiz-opt.wrong { background: rgba(255,71,71,0.12); border-color: var(--danger); color: var(--danger); }
+  .quiz-explanation {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(71,71,255,0.08);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 var(--r) var(--r) 0;
+    font-size: 0.85rem;
+    color: var(--text2);
+    display: none;
+  }
+  .quiz-explanation.show { display: block; }
+
+  /* DISCUSSION */
+  .discussion-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+  .disc-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+  }
+  .disc-type {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .disc-type-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .disc-card h3 {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  .disc-prompts { list-style: none; }
+  .disc-prompts li {
+    font-size: 0.85rem;
+    color: var(--text2);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--card-border);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .disc-prompts li:last-child { border-bottom: none; }
+  .disc-prompts li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* RESOURCES */
+  .resources-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+  .resource-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .resource-card:hover { border-color: rgba(255,107,71,0.4); transform: translateY(-2px); }
+  .resource-type {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  .type-article { background: rgba(124,106,255,0.15); color: var(--accent3); }
+  .type-video { background: rgba(255,71,71,0.15); color: #ff7070; }
+  .type-study { background: rgba(71,224,168,0.15); color: var(--accent4); }
+  .resource-card h4 {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .resource-card p { font-size: 0.82rem; color: var(--text2); line-height: 1.55; flex: 1; }
+  .resource-source {
+    font-size: 0.75rem;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* SCORE / FEEDBACK */
+  .score-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg3);
+    border-radius: var(--r);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .score-val { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--accent2); }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--bg3);
+    border-radius: 100px;
+    height: 6px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  /* GLOSSARY */
+  .glossary-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .glossary-item {
+    border-bottom: 1px solid var(--card-border);
+    padding: 1.25rem 0;
+  }
+  .glossary-term {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .glossary-origin {
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--bg3);
+    color: var(--text3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-family: var(--font-body);
+  }
+  .glossary-def { font-size: 0.9rem; color: var(--text2); line-height: 1.65; }
+  .glossary-warning {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: #ff7070;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .glossary-warning::before { content: '⚠'; flex-shrink: 0; }
+
+  /* TABS */
+  .tab-bar {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text2);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    font-family: var(--font-body);
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* FEEDBACK BANNER */
+  .feedback-banner {
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--r);
+    font-size: 0.88rem;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .feedback-banner.show { display: flex; align-items: center; gap: 0.75rem; }
+  .feedback-success { background: rgba(71,224,168,0.12); border: 1px solid rgba(71,224,168,0.3); color: var(--success); }
+  .feedback-error { background: rgba(255,71,71,0.1); border: 1px solid rgba(255,71,71,0.25); color: #ff7070; }
+
+  /* OVERVIEW BANNER */
+  .overview-banner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+  }
+  .warning-box {
+    background: rgba(255,107,71,0.08);
+    border: 1px solid rgba(255,107,71,0.25);
+    border-radius: var(--r-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .warning-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .warning-box p { font-size: 0.88rem; color: var(--text2); line-height: 1.65; }
+  .warning-box strong { color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--card-border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text3);
+  }
+
+  @media (max-width: 600px) {
+    .conn-grid { grid-template-columns: repeat(2, 1fr); }
+    .match-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--card-border);
+    border-radius: 100px;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text2);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+  .theme-toggle .toggle-icon { font-size: 1rem; line-height: 1; }
+
+  /* Light mode overrides for elements with hardcoded colours */
+  html.light .warning-box { background: rgba(224,82,31,0.07); border-color: rgba(224,82,31,0.25); }
+  html.light .fib-blank { background: var(--bg2); color: var(--text); }
+  html.light .conn-cell { background: var(--bg3); color: var(--text); }
+  html.light .match-item { background: var(--bg3); color: var(--text); }
+  html.light .word-chip { background: var(--bg3); color: var(--text); }
+  html.light .quiz-q-text { background: var(--bg3); color: var(--text); }
+  html.light .quiz-opt { background: var(--bg3); color: var(--text); }
+  html.light .score-bar { background: var(--bg3); }
+  html.light .fib-text { background: var(--bg3); }
+  html.light footer { color: var(--text3); }
+  html.light .glossary-warning { color: #b02020; }
+  html.light .conn-cell.correct-0 { color: var(--success); }
+  html.light .conn-cell.correct-1 { color: var(--accent3); }
+  html.light .conn-cell.correct-2 { color: var(--accent2); }
+  html.light .conn-cell.correct-3 { color: var(--accent); }
+  html.light .match-item.matched { color: var(--success); }
+  html.light .match-item.wrong { color: var(--danger); }
+  html.light .fib-blank.filled { color: var(--accent3); }
+  html.light .fib-blank.correct-ans { color: var(--success); }
+  html.light .fib-blank.wrong-ans { color: var(--danger); }
+  html.light .quiz-opt.correct { color: var(--success); }
+  html.light .quiz-opt.wrong { color: var(--danger); }
+  html.light .quiz-explanation { background: rgba(80,64,208,0.07); }
+  html.light .tab-btn { color: var(--text2); }
+  html.light .tab-btn:hover { color: var(--text); }
+  html.light .tab-btn.active { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="javascript:void(0)" onclick="showPage('home')">🔍 Decode</a>
+    <ul class="nav-links">
+      <li><a href="javascript:void(0)" onclick="showPage('home')" id="nav-home" class="active">Overview</a></li>
+      <li><a href="javascript:void(0)" onclick="showPage('glossary')" id="nav-glossary">Glossary</a></li>
+      <li><a href="javascript:void(0)" onclick="showPage('games')" id="nav-games">Activities</a></li>
+      <li><a href="javascript:void(0)" onclick="showPage('discussion')" id="nav-discussion">Discussion</a></li>
+      <li><a href="javascript:void(0)" onclick="showPage('resources')" id="nav-resources">Resources</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">
+      <span class="toggle-icon" id="theme-icon">☀️</span>
+      <span id="theme-label">Light mode</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-tag">Critical Media Literacy</div>
+    <h1>Decode the <span>Manosphere</span></h1>
+    <p>An interactive learning space to understand online misogynist movements — what they are, where they come from, and why they matter. Built for curious, critical thinkers.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="showPage('games')">▶ Start Activities</button>
+      <button class="btn btn-ghost" onclick="showPage('glossary')">📖 Glossary</button>
+    </div>
+  </div>
+
+  <div class="overview-banner">
+    <div class="warning-box">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>A note before you start:</strong> Some of the ideas you'll encounter in this module are harmful and offensive. We study them not to validate them, but to understand and critically challenge them. If you find any content distressing, it's okay to take a break and talk to someone you trust.</p>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-label">What is it?</div>
+    <div class="section-title">Understanding the Manosphere</div>
+    <p class="section-desc">The "manosphere" is a collection of online communities, movements, and ideologies centred on men's grievances — often promoting anti-feminist, misogynist, and sometimes violent views.</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(255,107,71,0.15);">🌐</div>
+      <h3>What is it?</h3>
+      <p>A loose network of online spaces — from Reddit forums to YouTube channels to TikTok accounts — where men gather to discuss gender, relationships, and society through a deeply anti-feminist lens.</p>
+      <span class="card-tag" style="background:rgba(255,107,71,0.15);color:var(--accent);">Origin</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(124,106,255,0.15);">📱</div>
+      <h3>Where does it live?</h3>
+      <p>It started in niche internet forums but now spreads through mainstream platforms. Influencers like Andrew Tate have brought manosphere ideas to millions of young people on TikTok, Instagram, and YouTube.</p>
+      <span class="card-tag" style="background:rgba(124,106,255,0.15);color:var(--accent3);">Platforms</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(71,224,168,0.15);">🚨</div>
+      <h3>Why is it harmful?</h3>
+      <p>Research links manosphere exposure to increased misogyny, sexual violence, and radicalisation. It promotes damaging ideas about gender, masculinity, and women's roles in society — often targeting young men.</p>
+      <span class="card-tag" style="background:rgba(71,224,168,0.15);color:var(--accent4);">Impact</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(255,201,71,0.15);">🗺️</div>
+      <h3>Is it global?</h3>
+      <p>Yes. While it started in English-speaking countries, manosphere movements now operate across Africa, Latin America, Asia, and Europe — adapting local grievances while sharing the same core ideology.</p>
+      <span class="card-tag" style="background:rgba(255,201,71,0.15);color:var(--accent2);">Global</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(255,107,71,0.15);">🔬</div>
+      <h3>The "Red Pill" pipeline</h3>
+      <p>Many young men enter through seemingly reasonable content — self-help, gym motivation, dating advice — and gradually encounter more extreme, misogynist content. This is known as radicalisation by design.</p>
+      <span class="card-tag" style="background:rgba(255,107,71,0.15);color:var(--accent);">Radicalisation</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(124,106,255,0.15);">🎮</div>
+      <h3>From GamerGate onwards</h3>
+      <p>The 2014 GamerGate harassment campaign is often seen as a turning point — showing how coordinated online misogyny could cause real-world harm and go mainstream. It laid groundwork for what followed.</p>
+      <span class="card-tag" style="background:rgba(124,106,255,0.15);color:var(--accent3);">History</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-header">
+    <div class="section-label">Key Concepts</div>
+    <div class="section-title">The Ecosystem</div>
+    <p class="section-desc">The manosphere is not one thing — it's a web of overlapping communities, each with distinct beliefs but connected by anti-feminist ideology.</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <h3>Incels</h3>
+      <p>"Involuntary celibates" — men who believe they are unfairly denied romantic or sexual relationships. Some communities glorify or justify violence against women. Associated with several terror attacks.</p>
+    </div>
+    <div class="card">
+      <h3>PUAs — Pick Up Artists</h3>
+      <p>Men who use psychological manipulation techniques ("game") to seduce women. Frame women as targets to be conquered rather than human beings with agency. Often degrading and coercive.</p>
+    </div>
+    <div class="card">
+      <h3>MGTOW</h3>
+      <p>"Men Going Their Own Way" — advocates complete withdrawal from relationships with women. Frames feminism as a threat and promotes separatism. Ranges from mild lifestyle choice to extreme misogyny.</p>
+    </div>
+    <div class="card">
+      <h3>MRAs — Men's Rights Activists</h3>
+      <p>Focus on perceived injustices against men (custody, false accusations, etc.). Some have legitimate concerns but the movement is often co-opted by anti-feminist activists who target women's rights.</p>
+    </div>
+    <div class="card">
+      <h3>"Alpha" / Hustle Culture</h3>
+      <p>Presents a hyper-masculine ideal of dominance, wealth, and physical strength. Influencers like Andrew Tate monetise this vision. Often involves contempt for women and less "successful" men.</p>
+    </div>
+    <div class="card">
+      <h3>The "Black Pill"</h3>
+      <p>An extreme, nihilistic ideology claiming looks and genetics determine all outcomes — especially romantic ones. Promotes the view that women are inherently shallow and that violence may be justified.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GLOSSARY PAGE ===== -->
+<div id="page-glossary" class="page">
+  <div class="section-header">
+    <div class="section-label">Reference</div>
+    <div class="section-title">Glossary of Terms</div>
+    <p class="section-desc">These are terms used within or about manosphere communities. Understanding them helps you recognise and critically evaluate this content.</p>
+  </div>
+  <div class="glossary-wrap">
+
+    <div class="glossary-item">
+      <div class="glossary-term">The Manosphere <span class="glossary-origin">umbrella term</span></div>
+      <div class="glossary-def">A loose network of online spaces, content creators, and communities united by anti-feminist views and the belief that men are disadvantaged or oppressed by modern society and feminism.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Red Pill <span class="glossary-origin">The Matrix (1999)</span></div>
+      <div class="glossary-def">Borrowed from the film where taking the "red pill" reveals hidden truth. In the manosphere, it means accepting their worldview — that feminism is a lie, women are manipulative, and traditional gender hierarchies are natural and correct.</div>
+      <div class="glossary-warning">This metaphor is deliberately seductive — it frames misogyny as "awakening" to secret truth, which is a common radicalisation technique.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Blue Pill <span class="glossary-origin">manosphere jargon</span></div>
+      <div class="glossary-def">The opposite of red pill — someone who accepts mainstream views on gender equality. Used dismissively to mean "brainwashed" or "naive." Anyone who believes in feminism is "blue pilled."</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Black Pill <span class="glossary-origin">incel forums</span></div>
+      <div class="glossary-def">An extreme nihilistic belief that one's fate is determined entirely by physical appearance and genetics. Promotes hopelessness, often used to justify hatred of women and even violence. More extreme than the red pill.</div>
+      <div class="glossary-warning">Communities built around the black pill have been linked to serious acts of violence including terrorist attacks.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Incel <span class="glossary-origin">originally inclusive term</span></div>
+      <div class="glossary-def">Short for "involuntary celibate." Originally coined by a queer woman in the 1990s as an inclusive support community, it was co-opted by misogynist men. Now refers to men who blame women for their lack of romantic relationships.</div>
+      <div class="glossary-warning">Some incel communities actively celebrate or encourage violence against women. This term represents a clear danger in its extreme forms.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Hypergamy <span class="glossary-origin">sociology term, misused</span></div>
+      <div class="glossary-def">Originally a sociology term for marrying "up" in social status. In the manosphere, it's used as a claim that women are biologically programmed to only seek the highest-status men, making them inherently disloyal and exploitative.</div>
+      <div class="glossary-warning">This is a distortion of the scientific concept used to justify misogyny with false scientific authority.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Looksmaxing <span class="glossary-origin">incel/PUA communities</span></div>
+      <div class="glossary-def">The practice of maximising one's physical attractiveness — through gym, grooming, or even surgery — based on the belief that looks determine romantic success. Can range from healthy self-care to obsessive and harmful behaviours.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Sigma Male <span class="glossary-origin">manosphere/social media</span></div>
+      <div class="glossary-def">A supposedly superior male type who operates outside social hierarchies. Presented as even better than an "alpha" because he doesn't need social validation. Became an internet meme but is used seriously in manosphere content to glorify isolation and superiority.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Femoid / Foid <span class="glossary-origin">incel forums</span></div>
+      <div class="glossary-def">A dehumanising term for women used in incel communities, short for "female humanoid." Using this language dehumanises women and is a warning sign of radicalisation.</div>
+      <div class="glossary-warning">Deliberately dehumanising language like this is used to psychologically prepare individuals to accept or commit violence.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Stacy / Chad <span class="glossary-origin">incel lexicon</span></div>
+      <div class="glossary-def">"Chad" = a conventionally attractive, high-status man who easily gets dates. "Stacy" = a conventionally attractive woman who only dates Chads and looks down on other men. These archetypes reduce complex humans to shallow stereotypes.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Normie <span class="glossary-origin">incel/4chan communities</span></div>
+      <div class="glossary-def">Someone who lives a "normal" social life — has relationships, friends, mainstream interests. Used by incels and similar communities to create an in-group/out-group divide, implying "normies" are inferior or asleep to hidden truths.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">MGTOW <span class="glossary-origin">acronym</span></div>
+      <div class="glossary-def">Men Going Their Own Way. A movement advocating that men disengage from relationships with women entirely, seeing them as inherently exploitative. Ranges from moderate lifestyle choices to extreme misogyny and calls for women's rights to be reversed.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Looksmaxxing vs Personality pill <span class="glossary-origin">incel debate</span></div>
+      <div class="glossary-def">An internal debate: "looksmaxxers" say physical appearance determines everything; "personality pillers" (a minority) think personality and social skills matter. The debate itself reveals how these communities reduce all human relationships to transactions.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">GamerGate <span class="glossary-origin">gaming community, 2014</span></div>
+      <div class="glossary-def">A 2014 harassment campaign targeting women in gaming, disguised as a debate about "ethics in games journalism." Seen as a turning point where coordinated online misogyny found mainstream reach and demonstrated its power — a forerunner of the modern manosphere.</div>
+    </div>
+
+    <div class="glossary-item">
+      <div class="glossary-term">Manosphere Pipeline <span class="glossary-origin">media/academic term</span></div>
+      <div class="glossary-def">The gradual process by which young men move from mainstream content (fitness, self-help, humour) into increasingly extreme manosphere content through algorithmic recommendations. Radicalisation is often incremental and difficult to notice while it's happening.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== GAMES PAGE ===== -->
+<div id="page-games" class="page">
+  <div class="section-header">
+    <div class="section-label">Interactive Learning</div>
+    <div class="section-title">Activities & Games</div>
+    <p class="section-desc">Test and build your knowledge through these activities. Each game focuses on different aspects of understanding the manosphere.</p>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab(this,'tab-connections')">🔗 Connections</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-matching')">🤝 Matching</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-fillblanks')">✏️ Fill the Gaps</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-truefake')">❓ True or Myth?</button>
+  </div>
+
+  <!-- CONNECTIONS TAB -->
+  <div id="tab-connections" class="tab-content active">
+    <div class="game-wrap">
+      <div class="game-box">
+        <div class="game-title">Connections</div>
+        <div class="game-desc">Find four groups of four that belong together. Select four cards and press "Check Group." You have 4 attempts. Think carefully — some terms could trick you!</div>
+
+        <div class="score-bar">
+          <span>Groups found:</span>
+          <span class="score-val" id="conn-score">0 / 4</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--text2);">Lives: <span class="conn-lives" id="conn-lives"></span></span>
+        </div>
+
+        <div class="conn-grid" id="conn-grid"></div>
+
+        <div class="conn-actions">
+          <button class="btn btn-ghost" onclick="deselectAll()" style="font-size:0.82rem;padding:0.5rem 1rem;">Deselect All</button>
+          <button class="btn btn-primary" onclick="checkConnGroup()" style="font-size:0.82rem;padding:0.5rem 1rem;">Check Group</button>
+          <button class="btn btn-ghost" onclick="shuffleConnGrid()" style="font-size:0.82rem;padding:0.5rem 1rem;">🔀 Shuffle</button>
+        </div>
+
+        <div class="conn-msg" id="conn-msg"></div>
+        <div class="conn-legend" id="conn-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATCHING TAB -->
+  <div id="tab-matching" class="tab-content">
+    <div class="game-wrap">
+      <div class="game-box">
+        <div class="game-title">Term Matching</div>
+        <div class="game-desc">Match each term on the left with its correct definition on the right. Click a term, then click its definition.</div>
+
+        <div class="feedback-banner feedback-success" id="match-feedback-ok">✅ Correct match! Keep going.</div>
+        <div class="feedback-banner feedback-error" id="match-feedback-err">❌ Not quite — try a different combination.</div>
+
+        <div id="match-score" class="score-bar" style="margin-bottom:1rem;">
+          <span>Matched:</span>
+          <span class="score-val" id="match-score-val">0 / 8</span>
+        </div>
+
+        <div class="match-grid">
+          <div class="match-col">
+            <div class="match-col-label">Terms</div>
+            <div id="match-terms"></div>
+          </div>
+          <div class="match-col">
+            <div class="match-col-label">Definitions</div>
+            <div id="match-defs"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.25rem;">
+          <button class="btn btn-ghost" onclick="resetMatching()" style="font-size:0.82rem;">🔄 Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILL BLANKS TAB -->
+  <div id="tab-fillblanks" class="tab-content">
+    <div class="game-wrap">
+      <div class="game-box">
+        <div class="game-title">Fill the Gaps</div>
+        <div class="game-desc">Choose words from the word bank to complete the sentences. Click a blank, then click the word you want to place there.</div>
+
+        <div id="fib-questions"></div>
+
+        <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="checkFIB()" style="font-size:0.82rem;">Check Answers</button>
+          <button class="btn btn-ghost" onclick="resetFIB()" style="font-size:0.82rem;">🔄 Reset</button>
+        </div>
+        <div class="conn-msg" id="fib-msg" style="margin-top:0.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUE/FALSE TAB -->
+  <div id="tab-truefake" class="tab-content">
+    <div class="game-wrap">
+      <div class="game-box">
+        <div class="game-title">True or Myth?</div>
+        <div class="game-desc">Decide whether each statement is true or a manosphere myth. Click your answer to reveal the explanation.</div>
+
+        <div class="score-bar" style="margin-bottom:1.5rem;">
+          <span>Score:</span>
+          <span class="score-val" id="tf-score">0 / 10</span>
+        </div>
+
+        <div id="tf-questions"></div>
+
+        <button class="btn btn-ghost" onclick="resetTF()" style="font-size:0.82rem;margin-top:1rem;">🔄 Reset Quiz</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== DISCUSSION PAGE ===== -->
+<div id="page-discussion" class="page">
+  <div class="section-header">
+    <div class="section-label">Critical Thinking</div>
+    <div class="section-title">Discussion & Reflection</div>
+    <p class="section-desc">Use these prompts for pair work, small groups, or individual reflection. There are no single right answers — the goal is to think critically and listen to each other.</p>
+  </div>
+  <div class="discussion-grid">
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent);">
+        <div class="disc-type-dot" style="background:var(--accent);"></div> Pair Discussion
+      </div>
+      <h3>Understanding Appeal</h3>
+      <ul class="disc-prompts">
+        <li>Why might young men find manosphere content appealing? What real needs or feelings might it be responding to?</li>
+        <li>Is there a difference between "men discussing problems men face" and "anti-feminist content"? Where is the line?</li>
+        <li>What legitimate grievances might some men have that the manosphere exploits?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent3);">
+        <div class="disc-type-dot" style="background:var(--accent3);"></div> Small Group
+      </div>
+      <h3>Media & Algorithms</h3>
+      <ul class="disc-prompts">
+        <li>How do recommendation algorithms make radicalisation easier? Who is responsible — the user, the platform, or both?</li>
+        <li>Have you ever been recommended content online that surprised you? How did it make you feel?</li>
+        <li>Should platforms do more to limit manosphere content? What are the risks of censorship?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent2);">
+        <div class="disc-type-dot" style="background:var(--accent2);"></div> Reflection
+      </div>
+      <h3>Gender & Identity</h3>
+      <ul class="disc-prompts">
+        <li>What does "masculinity" mean to you? How is the manosphere's version different from your own?</li>
+        <li>Are there pressures on young men in your school or community that could make manosphere ideas appealing?</li>
+        <li>How can we support young men without validating misogynist ideas?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent4);">
+        <div class="disc-type-dot" style="background:var(--accent4);"></div> Critical Analysis
+      </div>
+      <h3>Real-World Impact</h3>
+      <ul class="disc-prompts">
+        <li>The manosphere has been linked to increases in misogynistic attitudes in schools. Have you observed this? What does it look like?</li>
+        <li>How might manosphere ideas affect friendships, dating, and school environments?</li>
+        <li>Research shows manosphere content affects not just men but also women and girls. How?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent);">
+        <div class="disc-type-dot" style="background:var(--accent);"></div> Debate
+      </div>
+      <h3>Language & Power</h3>
+      <ul class="disc-prompts">
+        <li>"The red pill is just a metaphor — it doesn't actually harm anyone." Do you agree or disagree?</li>
+        <li>Is using dehumanising language (like "femoid") ever just harmless internet slang? Why or why not?</li>
+        <li>Can irony or memes spread genuinely harmful ideas? Give an example.</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent3);">
+        <div class="disc-type-dot" style="background:var(--accent3);"></div> Solution-Focused
+      </div>
+      <h3>What Can Be Done?</h3>
+      <ul class="disc-prompts">
+        <li>If a friend started using manosphere language, how would you respond? What would you say?</li>
+        <li>What would a better alternative look like for young men seeking community, purpose, and identity online?</li>
+        <li>What role can schools, parents, and governments play — and what are the limits of each?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent2);">
+        <div class="disc-type-dot" style="background:var(--accent2);"></div> Global Perspective
+      </div>
+      <h3>Global & Cultural Dimensions</h3>
+      <ul class="disc-prompts">
+        <li>The manosphere exists globally but takes different forms in different cultures. What might explain this?</li>
+        <li>Is misogyny something imported from Western internet culture, or does it have local roots too?</li>
+        <li>How does economic inequality or lack of opportunity contribute to manosphere radicalisation in some countries?</li>
+      </ul>
+    </div>
+
+    <div class="disc-card">
+      <div class="disc-type" style="color:var(--accent4);">
+        <div class="disc-type-dot" style="background:var(--accent4);"></div> Personal Reflection
+      </div>
+      <h3>Your Own Experience</h3>
+      <ul class="disc-prompts">
+        <li>Have you ever encountered manosphere content without knowing what it was? What was your reaction?</li>
+        <li>What values guide how you think about gender equality in your own life?</li>
+        <li>After studying this material, what is one thing you want to remember or share?</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== RESOURCES PAGE ===== -->
+<div id="page-resources" class="page">
+  <div class="section-header">
+    <div class="section-label">Go Deeper</div>
+    <div class="section-title">Articles, Videos & Research</div>
+    <p class="section-desc">Curated resources for further learning. Some are challenging — approach them critically.</p>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 1rem;">
+    <p style="font-size:0.85rem;color:var(--text3);background:var(--bg3);padding:0.75rem 1rem;border-radius:var(--r);display:inline-block;">⚠️ External links open in a new tab. Content may include offensive language or ideas — engage critically.</p>
+  </div>
+
+  <div class="resources-grid">
+
+    <a href="https://www.theguardian.com/commentisfree/2026/apr/13/gamergate-andrew-tate-manosphere-feminists" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-article">Article</span>
+      <h4>From GamerGate to Andrew Tate: The Manosphere's Rise</h4>
+      <p>Traces how the manosphere evolved from niche internet culture into mainstream politics, and what feminists should do about it.</p>
+      <div class="resource-source">📰 The Guardian · Apr 2026</div>
+    </a>
+
+    <a href="https://www.theguardian.com/uk-news/2026/apr/15/beyond-the-uk-and-us-manosphere-lies-a-deeper-darker-global-problem" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-article">Article</span>
+      <h4>Beyond the UK and US: The Global Manosphere Problem</h4>
+      <p>How manosphere ideology spreads far beyond English-speaking countries, taking root across Africa, Asia, and Latin America.</p>
+      <div class="resource-source">📰 The Guardian · Apr 2026</div>
+    </a>
+
+    <a href="https://www.theguardian.com/tv-and-radio/2026/mar/11/louis-theroux-inside-the-manosphere-review-why-doesnt-he-focus-more-on-the-impact-on-women" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-article">Review</span>
+      <h4>Louis Theroux: Inside the Manosphere — Review</h4>
+      <p>A critical look at the documentary — praising its access while questioning whether it adequately centres the experience of women.</p>
+      <div class="resource-source">📰 The Guardian · Mar 2026</div>
+    </a>
+
+    <a href="https://www.theguardian.com/lifeandstyle/video/2026/apr/21/how-the-manosphere-ruined-dating-the-global-dating-crisis-episode-1" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-video">Video</span>
+      <h4>How the Manosphere Ruined Dating</h4>
+      <p>Episode 1 of The Guardian's Global Dating Crisis series — exploring how manosphere ideas are affecting real-world relationships and dating culture.</p>
+      <div class="resource-source">▶ The Guardian · Apr 2026</div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=pfEHQH1RSr0" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-video">YouTube</span>
+      <h4>The Manosphere Explained (YouTube)</h4>
+      <p>A video explainer breaking down the history, key figures, and ideology of the manosphere for a general audience.</p>
+      <div class="resource-source">▶ YouTube</div>
+    </a>
+
+    <a href="https://www.theguardian.com/society/2025/jun/13/study-manosphere-ofcom" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-study">Research</span>
+      <h4>Ofcom Study: Manosphere's Reach & Impact</h4>
+      <p>Research commissioned by Ofcom examining how widespread manosphere content is on mainstream platforms and its measurable effects on attitudes.</p>
+      <div class="resource-source">📰 The Guardian · Jun 2025</div>
+    </a>
+
+    <a href="https://www.abc.net.au/religion/girls-arent-alright-the-manosphere-and-its-female-equivalent/106603584" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-article">Article</span>
+      <h4>Girls Aren't Alright: The Manosphere & Its Female Equivalent</h4>
+      <p>Explores how misogynist online culture harms women and girls, and whether there are equivalent harmful spaces targeting young women.</p>
+      <div class="resource-source">📰 ABC Religion & Ethics</div>
+    </a>
+
+    <a href="https://www.theguardian.com/global-development/2026/apr/07/african-manosphere-misogyny-social-media" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-article">Article</span>
+      <h4>The African Manosphere: Misogyny & Social Media</h4>
+      <p>A deep-dive into how manosphere ideology is taking hold across African countries, adapting local context while spreading global misogyny.</p>
+      <div class="resource-source">📰 The Guardian · Apr 2026</div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=xv3Rubw7jpQ" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-video">YouTube</span>
+      <h4>Inside Incel Culture (YouTube)</h4>
+      <p>A documentary-style video exploring incel communities — their beliefs, their language, and the real-world consequences of their ideology.</p>
+      <div class="resource-source">▶ YouTube</div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=luNyPU5hXtc" target="_blank" rel="noopener" class="resource-card">
+      <span class="resource-type type-video">YouTube</span>
+      <h4>How Algorithms Radicalise Young Men (YouTube)</h4>
+      <p>Examines the role of recommendation algorithms in pushing young men from mainstream content to increasingly extreme manosphere material.</p>
+      <div class="resource-source">▶ YouTube</div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>Decode the Manosphere · Critical Media Literacy for Secondary Students · Content is educational and designed for critical analysis</p>
+  <p style="margin-top:0.5rem;color:#444;">Created by <strong style="color:#68666a;">Barbara Anna Zielonka</strong> · Nannestad High School</p>
+</footer>
+
+<script>
+// THEME TOGGLE
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = !html.classList.contains('light');
+  html.classList.toggle('light', isDark);
+  document.getElementById('theme-icon').textContent = isDark ? '🌙' : '☀️';
+  document.getElementById('theme-label').textContent = isDark ? 'Dark mode' : 'Light mode';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+// Restore saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon = document.getElementById('theme-icon');
+      const label = document.getElementById('theme-label');
+      if (icon) icon.textContent = '🌙';
+      if (label) label.textContent = 'Dark mode';
+    });
+  }
+})();
+
+// PAGE NAVIGATION
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+// TAB SWITCHING
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ============================================================
+// CONNECTIONS GAME
+// ============================================================
+const connGroups = [
+  {
+    label: "Manosphere sub-communities",
+    color: 0,
+    members: ["Incel", "MGTOW", "PUA", "MRA"]
+  },
+  {
+    label: "The 'pill' metaphor system",
+    color: 1,
+    members: ["Red Pill", "Blue Pill", "Black Pill", "Purple Pill"]
+  },
+  {
+    label: "Dehumanising terms for women",
+    color: 2,
+    members: ["Femoid", "Foid", "Stacy", "Roastie"]
+  },
+  {
+    label: "Tactics & behaviours",
+    color: 3,
+    members: ["Looksmaxxing", "Negging", "Ghosting", "Simping"]
+  }
+];
+
+let connCells = [];
+let connSelected = [];
+let connFound = [];
+let connLives = 4;
+
+function initConnections() {
+  const all = connGroups.flatMap(g => g.members);
+  connCells = shuffleArr([...all]);
+  connSelected = [];
+  connFound = [];
+  connLives = 4;
+  renderConnGrid();
+  renderConnLives();
+  document.getElementById('conn-score').textContent = '0 / 4';
+  document.getElementById('conn-msg').textContent = '';
+  document.getElementById('conn-legend').innerHTML = '';
+}
+
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function renderConnGrid() {
+  const grid = document.getElementById('conn-grid');
+  grid.innerHTML = '';
+  connCells.forEach(word => {
+    const found = connFound.find(f => f.members.includes(word));
+    const div = document.createElement('div');
+    div.className = 'conn-cell';
+    div.textContent = word;
+    div.dataset.word = word;
+    if (found) {
+      div.className = `conn-cell correct-${found.color}`;
+    } else {
+      div.addEventListener('click', () => toggleConnCell(word));
+      if (connSelected.includes(word)) div.classList.add('selected');
+    }
+    grid.appendChild(div);
+  });
+}
+
+function toggleConnCell(word) {
+  const idx = connSelected.indexOf(word);
+  if (idx === -1) {
+    if (connSelected.length < 4) connSelected.push(word);
+  } else {
+    connSelected.splice(idx, 1);
+  }
+  renderConnGrid();
+}
+
+function deselectAll() {
+  connSelected = [];
+  renderConnGrid();
+}
+
+function shuffleConnGrid() {
+  connCells = shuffleArr([...connCells]);
+  renderConnGrid();
+}
+
+function renderConnLives() {
+  const el = document.getElementById('conn-lives');
+  el.innerHTML = '';
+  for (let i = 0; i < 4; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'life' + (i >= connLives ? ' lost' : '');
+    el.appendChild(dot);
+  }
+}
+
+function checkConnGroup() {
+  if (connSelected.length !== 4) {
+    document.getElementById('conn-msg').textContent = 'Select exactly 4 cards.';
+    return;
+  }
+  const matched = connGroups.find(g => g.members.every(m => connSelected.includes(m)) && !connFound.includes(g));
+  if (matched) {
+    connFound.push(matched);
+    connSelected = [];
+    document.getElementById('conn-score').textContent = `${connFound.length} / 4`;
+    renderConnGrid();
+    addConnLegendItem(matched);
+    if (connFound.length === 4) {
+      document.getElementById('conn-msg').style.color = 'var(--success)';
+      document.getElementById('conn-msg').textContent = '🎉 You found all four groups!';
+    } else {
+      document.getElementById('conn-msg').style.color = 'var(--success)';
+      document.getElementById('conn-msg').textContent = `✅ "${matched.label}" — nice!`;
+    }
+  } else {
+    connLives--;
+    renderConnLives();
+    // Check if one away
+    const oneAway = connGroups.find(g => !connFound.includes(g) && g.members.filter(m => connSelected.includes(m)).length === 3);
+    const msg = document.getElementById('conn-msg');
+    msg.style.color = 'var(--danger)';
+    if (connLives === 0) {
+      msg.textContent = 'No more lives! Here are the correct groups:';
+      revealAll();
+    } else if (oneAway) {
+      msg.textContent = `❌ So close — one away! (${connLives} lives left)`;
+    } else {
+      msg.textContent = `❌ Not a group — try again. (${connLives} lives left)`;
+    }
+    // shake selected cells
+    const grid = document.getElementById('conn-grid');
+    grid.querySelectorAll('.selected').forEach(c => {
+      c.classList.add('wrong');
+      setTimeout(() => c.classList.remove('wrong'), 400);
+    });
+    connSelected = [];
+  }
+}
+
+function addConnLegendItem(group) {
+  const colors = ['var(--success)', 'var(--accent3)', 'var(--accent2)', 'var(--accent)'];
+  const legend = document.getElementById('conn-legend');
+  const item = document.createElement('div');
+  item.className = 'conn-legend-item';
+  item.style.background = 'var(--bg3)';
+  item.innerHTML = `<div class="conn-legend-dot" style="background:${colors[group.color]}"></div>
+    <strong style="font-size:0.82rem;">${group.label}</strong>
+    <span style="font-size:0.78rem;color:var(--text3);margin-left:auto;">${group.members.join(', ')}</span>`;
+  legend.appendChild(item);
+}
+
+function revealAll() {
+  connFound = [...connGroups];
+  renderConnGrid();
+  connGroups.forEach(g => addConnLegendItem(g));
+  document.getElementById('conn-score').textContent = '—';
+}
+
+// ============================================================
+// MATCHING GAME
+// ============================================================
+const matchPairs = [
+  { term: "Red Pill", def: "Believing in the manosphere worldview — seeing feminism as a lie" },
+  { term: "Incel", def: "Someone who blames others (especially women) for their lack of relationships" },
+  { term: "MGTOW", def: "Men who choose to disengage from relationships with women entirely" },
+  { term: "Hypergamy", def: "The (misused) claim that women only seek the highest-status men" },
+  { term: "Negging", def: "Giving backhanded compliments to undermine someone's confidence" },
+  { term: "Looksmaxxing", def: "Maximising one's physical appearance to attract partners" },
+  { term: "GamerGate", def: "2014 harassment campaign — a turning point for online misogyny" },
+  { term: "Black Pill", def: "Nihilistic belief that looks and genetics determine all outcomes in life" }
+];
+
+let matchSelectedTerm = null;
+let matchSelectedDef = null;
+let matchMatched = 0;
+
+function initMatching() {
+  matchSelectedTerm = null;
+  matchSelectedDef = null;
+  matchMatched = 0;
+  const terms = document.getElementById('match-terms');
+  const defs = document.getElementById('match-defs');
+  terms.innerHTML = '';
+  defs.innerHTML = '';
+  const shuffledPairs = shuffleArr([...matchPairs]);
+  const shuffledDefs = shuffleArr([...matchPairs]);
+  shuffledPairs.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.term;
+    el.dataset.id = p.term;
+    el.dataset.side = 'term';
+    el.addEventListener('click', () => handleMatchClick(el));
+    terms.appendChild(el);
+  });
+  shuffledDefs.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.def;
+    el.dataset.id = p.term;
+    el.dataset.side = 'def';
+    el.addEventListener('click', () => handleMatchClick(el));
+    defs.appendChild(el);
+  });
+  document.getElementById('match-score-val').textContent = '0 / 8';
+  hideFeedback('match-feedback-ok');
+  hideFeedback('match-feedback-err');
+}
+
+function hideFeedback(id) {
+  document.getElementById(id).classList.remove('show');
+}
+function showFeedback(id) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+function handleMatchClick(el) {
+  if (el.classList.contains('matched')) return;
+  const side = el.dataset.side;
+  if (side === 'term') {
+    if (matchSelectedTerm) matchSelectedTerm.classList.remove('selected');
+    matchSelectedTerm = el;
+    el.classList.add('selected');
+  } else {
+    if (matchSelectedDef) matchSelectedDef.classList.remove('selected');
+    matchSelectedDef = el;
+    el.classList.add('selected');
+  }
+  if (matchSelectedTerm && matchSelectedDef) {
+    if (matchSelectedTerm.dataset.id === matchSelectedDef.dataset.id) {
+      matchSelectedTerm.classList.remove('selected');
+      matchSelectedDef.classList.remove('selected');
+      matchSelectedTerm.classList.add('matched');
+      matchSelectedDef.classList.add('matched');
+      matchMatched++;
+      document.getElementById('match-score-val').textContent = `${matchMatched} / 8`;
+      showFeedback('match-feedback-ok');
+      matchSelectedTerm = null;
+      matchSelectedDef = null;
+    } else {
+      matchSelectedTerm.classList.add('wrong');
+      matchSelectedDef.classList.add('wrong');
+      setTimeout(() => {
+        matchSelectedTerm && matchSelectedTerm.classList.remove('wrong', 'selected');
+        matchSelectedDef && matchSelectedDef.classList.remove('wrong', 'selected');
+        matchSelectedTerm = null;
+        matchSelectedDef = null;
+      }, 500);
+      showFeedback('match-feedback-err');
+    }
+  }
+}
+
+function resetMatching() { initMatching(); }
+
+// ============================================================
+// FILL IN THE BLANKS
+// ============================================================
+const fibData = [
+  {
+    template: "The term 'manosphere' refers to a network of online [A] that share anti-feminist views. Many young men enter through [B] content before being exposed to more extreme ideas, a process called the [C] pipeline.",
+    blanks: { A: "communities", B: "self-help", C: "radicalisation" },
+    bank: ["communities", "self-help", "radicalisation", "gaming", "celebrity", "dating"]
+  },
+  {
+    template: "In incel communities, conventionally attractive men are called [A], while women who only date them are called [B]. The term 'incel' was originally coined as an [C] support space before being co-opted by misogynist communities.",
+    blanks: { A: "Chads", B: "Stacys", C: "inclusive" },
+    bank: ["Chads", "Stacys", "inclusive", "exclusive", "Normies", "Sigmas"]
+  },
+  {
+    template: "The [A] metaphor comes from the film The Matrix. Those who accept manosphere ideology consider themselves [B] pilled. The most extreme form — the [C] pill — is linked to nihilism and sometimes violence.",
+    blanks: { A: "red pill", B: "red", C: "black" },
+    bank: ["red pill", "red", "black", "blue", "green", "movie"]
+  }
+];
+
+let fibState = [];
+let fibActiveBlank = null;
+
+function initFIB() {
+  fibState = fibData.map(q => {
+    const filled = {};
+    Object.keys(q.blanks).forEach(k => filled[k] = null);
+    return { ...q, filled };
+  });
+  fibActiveBlank = null;
+  renderFIB();
+  document.getElementById('fib-msg').textContent = '';
+}
+
+function renderFIB() {
+  const container = document.getElementById('fib-questions');
+  container.innerHTML = '';
+  fibState.forEach((q, qi) => {
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '1.5rem';
+
+    const num = document.createElement('div');
+    num.className = 'quiz-q-number';
+    num.textContent = `Sentence ${qi + 1}`;
+    wrap.appendChild(num);
+
+    // Word bank for this question
+    const bankDiv = document.createElement('div');
+    bankDiv.className = 'word-bank';
+    const usedWords = Object.values(q.filled).filter(Boolean);
+    q.bank.forEach(w => {
+      const chip = document.createElement('div');
+      chip.className = 'word-chip' + (usedWords.includes(w) ? ' used' : '');
+      chip.textContent = w;
+      chip.addEventListener('click', () => placeWord(qi, w));
+      bankDiv.appendChild(chip);
+    });
+    wrap.appendChild(bankDiv);
+
+    // Build sentence with blanks
+    const textDiv = document.createElement('div');
+    textDiv.className = 'fib-text';
+    let html = q.template;
+    Object.keys(q.blanks).forEach(k => {
+      const val = q.filled[k];
+      const isActive = fibActiveBlank && fibActiveBlank.qi === qi && fibActiveBlank.k === k;
+      const blankHtml = `<span class="fib-blank${val ? ' filled' : ''}${isActive ? ' selected' : ''}" 
+        data-qi="${qi}" data-k="${k}" style="${isActive ? 'border-color:var(--accent);' : ''}"
+        onclick="selectBlank(${qi},'${k}')">${val || '___'}</span>`;
+      html = html.replace(`[${k}]`, blankHtml);
+    });
+    textDiv.innerHTML = html;
+    wrap.appendChild(textDiv);
+    container.appendChild(wrap);
+  });
+}
+
+function selectBlank(qi, k) {
+  fibActiveBlank = { qi, k };
+  renderFIB();
+}
+
+function placeWord(qi, word) {
+  if (!fibActiveBlank || fibActiveBlank.qi !== qi) {
+    fibActiveBlank = { qi, k: Object.keys(fibState[qi].blanks).find(k => !fibState[qi].filled[k]) };
+    if (!fibActiveBlank.k) return;
+  }
+  const { k } = fibActiveBlank;
+  // Remove word from wherever it currently is
+  fibState.forEach((q, i) => {
+    Object.keys(q.filled).forEach(bk => {
+      if (q.filled[bk] === word) q.filled[bk] = null;
+    });
+  });
+  fibState[qi].filled[k] = word;
+  fibActiveBlank = null;
+  renderFIB();
+}
+
+function checkFIB() {
+  let correct = 0, total = 0;
+  fibState.forEach((q, qi) => {
+    Object.keys(q.blanks).forEach(k => {
+      total++;
+      if (q.filled[k] === q.blanks[k]) correct++;
+    });
+  });
+  // Color blanks
+  const container = document.getElementById('fib-questions');
+  container.querySelectorAll('.fib-blank').forEach(el => {
+    const qi = parseInt(el.dataset.qi);
+    const k = el.dataset.k;
+    const correctAns = fibState[qi].blanks[k];
+    const given = fibState[qi].filled[k];
+    el.classList.remove('filled');
+    if (given === correctAns) el.classList.add('correct-ans');
+    else if (given) el.classList.add('wrong-ans');
+  });
+  const msg = document.getElementById('fib-msg');
+  if (correct === total) {
+    msg.style.color = 'var(--success)';
+    msg.textContent = `🎉 Perfect score! All ${total} answers correct.`;
+  } else {
+    msg.style.color = 'var(--accent2)';
+    msg.textContent = `You got ${correct} of ${total} correct. Try fixing the highlighted ones.`;
+  }
+}
+
+function resetFIB() { initFIB(); }
+
+// ============================================================
+// TRUE OR MYTH QUIZ
+// ============================================================
+const tfData = [
+  {
+    q: "The word 'incel' was originally coined by a woman as an inclusive support community for anyone struggling with dating.",
+    answer: true,
+    explanation: "True! The term was coined in the 1990s by a queer Canadian woman who created an inclusive website for people who felt lonely and isolated romantically. It was only later co-opted by misogynist online communities."
+  },
+  {
+    q: "The 'red pill' metaphor in the manosphere comes from a film directed and written by two trans women (the Wachowskis).",
+    answer: true,
+    explanation: "True! The Matrix was made by the Wachowskis, who are both trans women. There is deep irony in the manosphere adopting a trans-authored metaphor to promote anti-feminist and sometimes transphobic ideas."
+  },
+  {
+    q: "Manosphere communities only exist in the US and UK.",
+    answer: false,
+    explanation: "Myth! Manosphere communities are global. Research shows active and growing manosphere movements across Africa, Latin America, South and East Asia, and Eastern Europe — often adapted to local cultural contexts."
+  },
+  {
+    q: "Research shows that exposure to manosphere content is linked to increased misogynistic attitudes in young people.",
+    answer: true,
+    explanation: "True. A 2025 Ofcom-commissioned study and other academic research have found measurable links between manosphere content consumption and increased misogyny, negative attitudes about women, and in some cases acceptance of violence."
+  },
+  {
+    q: "Men who consume manosphere content are always consciously aware of its extreme ideology.",
+    answer: false,
+    explanation: "Myth! The 'pipeline' works precisely because radicalisation is gradual. Many men enter through fitness, self-help, or comedy content and only gradually encounter extreme ideas — often without noticing the shift in values."
+  },
+  {
+    q: "The term 'hypergamy' as used in the manosphere accurately reflects what social scientists mean by the term.",
+    answer: false,
+    explanation: "Myth! Hypergamy is a real sociological concept about social mobility in relationships. The manosphere distorts it, claiming it proves women are biologically programmed to exploit men — a conclusion not supported by research."
+  },
+  {
+    q: "Incel communities have been linked to real-world violence including terrorist attacks.",
+    answer: true,
+    explanation: "True and serious. Multiple mass killings — including the 2014 Isla Vista attacks and the 2018 Toronto van attack — were carried out by men who self-identified with incel ideology. Law enforcement agencies now treat the ideology as a terrorism threat."
+  },
+  {
+    q: "GamerGate (2014) is considered irrelevant to the modern manosphere.",
+    answer: false,
+    explanation: "Myth! GamerGate is widely considered a turning point. It demonstrated how online misogyny could coordinate at scale, mainstream into political discourse, and cause serious real-world harm to women. Many scholars trace the modern manosphere directly from GamerGate."
+  },
+  {
+    q: "Manosphere content only affects men — women and girls are largely unaffected.",
+    answer: false,
+    explanation: "Myth! Research consistently shows that manosphere culture harms women and girls directly — through harassment, changed dating behaviour from male partners, and increased societal misogyny. Girls report feeling less safe and respected in part due to manosphere ideas spreading in schools."
+  },
+  {
+    q: "Andrew Tate has been investigated or charged with serious crimes in connection with his content and business activities.",
+    answer: true,
+    explanation: "True. Andrew Tate and his brother have faced serious legal proceedings in Romania, including charges related to human trafficking and sexual exploitation. His social media accounts were also banned and later reinstated on various platforms amid ongoing controversy."
+  }
+];
+
+let tfAnswered = {};
+let tfScore = 0;
+
+function initTF() {
+  tfAnswered = {};
+  tfScore = 0;
+  renderTF();
+  document.getElementById('tf-score').textContent = '0 / 10';
+}
+
+function renderTF() {
+  const container = document.getElementById('tf-questions');
+  container.innerHTML = '';
+  tfData.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'quiz-question';
+
+    const num = document.createElement('div');
+    num.className = 'quiz-q-number';
+    num.textContent = `Question ${i + 1} of ${tfData.length}`;
+    wrap.appendChild(num);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'quiz-q-text';
+    qtext.textContent = item.q;
+    wrap.appendChild(qtext);
+
+    const opts = document.createElement('div');
+    opts.className = 'quiz-options';
+
+    ['True', 'Myth (False)'].forEach((label, li) => {
+      const isTrue = li === 0;
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = label;
+      if (tfAnswered[i] !== undefined) {
+        btn.disabled = true;
+        if (isTrue === item.answer && tfAnswered[i] === isTrue) btn.classList.add('correct');
+        else if (tfAnswered[i] === isTrue && isTrue !== item.answer) btn.classList.add('wrong');
+        else if (isTrue === item.answer) btn.classList.add('correct');
+      } else {
+        btn.addEventListener('click', () => handleTF(i, isTrue));
+      }
+      opts.appendChild(btn);
+    });
+    wrap.appendChild(opts);
+
+    const exp = document.createElement('div');
+    exp.className = 'quiz-explanation' + (tfAnswered[i] !== undefined ? ' show' : '');
+    exp.textContent = item.explanation;
+    wrap.appendChild(exp);
+
+    container.appendChild(wrap);
+  });
+}
+
+function handleTF(i, choice) {
+  if (tfAnswered[i] !== undefined) return;
+  tfAnswered[i] = choice;
+  if (choice === tfData[i].answer) {
+    tfScore++;
+    document.getElementById('tf-score').textContent = `${tfScore} / 10`;
+  }
+  renderTF();
+}
+
+function resetTF() {
+  tfAnswered = {};
+  tfScore = 0;
+  document.getElementById('tf-score').textContent = '0 / 10';
+  renderTF();
+}
+
+// INIT ALL
+initConnections();
+initMatching();
+initFIB();
+initTF();
+</script>
+</body>
+</html>
